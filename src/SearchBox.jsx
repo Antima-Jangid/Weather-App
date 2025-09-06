@@ -1,6 +1,5 @@
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-// import infobox from "./InfoBox";
 import "./SearchBox.css";
 import { useState } from "react";
 export default function SearchBox({ updateInfo }) {
@@ -15,7 +14,7 @@ export default function SearchBox({ updateInfo }) {
         `${API_URL}?q=${city}&appid=${API_KEY}&units=metric`
       );
       let jsonResponce = await response.json();
-      // console.log(jsonResponce);
+
       let result = {
         city: city,
         temp: jsonResponce.main.temp,
@@ -27,8 +26,7 @@ export default function SearchBox({ updateInfo }) {
       };
       console.log(result);
       return result;
-
-    } catch(err){
+    } catch (err) {
       throw err;
     }
   };
@@ -36,16 +34,15 @@ export default function SearchBox({ updateInfo }) {
     setCity(evt.target.value);
   };
 
-  let handleSubmit = async(evt) => {
-    try{
+  let handleSubmit = async (evt) => {
+    try {
       evt.preventDefault();
       console.log(city);
       setCity("");
       let newInfo = await getWeatherInfo();
       updateInfo(newInfo);
-
-    } catch(err){
-        setError(true);
+    } catch (err) {
+      setError(true);
     }
   };
   return (
@@ -63,7 +60,7 @@ export default function SearchBox({ updateInfo }) {
         <Button variant="contained" type="submit">
           Search
         </Button>
-    {error && <p style={{color: "red"}}>No such place exists!</p>}
+        {error && <p style={{ color: "red" }}>No such place exists!</p>}
       </form>
     </div>
   );
